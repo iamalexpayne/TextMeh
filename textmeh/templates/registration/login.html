@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Log In</title>
+</head>
+<body>
+
+  {% if form.errors %}
+        <div class="login-error">
+          The username or password you entered was incorrect.
+        </div>
+  {% endif %}
+
+  <form class="cise-login" method="post" action="">
+    {% csrf_token %}
+
+      <div class="login-title">Username</div>
+      <input class="login-input smooth-all" id="id_username" name="username" type="text" {% if form.username.value %} value="{{ form.username.value }}" {% endif %} placeholder="Username" onblur="nameFilled()">
+
+      <div class="login-title">Password</div>
+      <input class="login-input smooth-all" id="id_password" name="password" type="password" {% if form.password.value %} value="{{ form.password.value }}" {% endif %} placeholder="Password" onblur="pwFilled()">
+
+      <br><br>
+
+      <a href="{% url 'registration' %}">Sign Up</a>
+     <!--  <select class="dropbtn">Language
+      <option>English</option>
+      <option>Spanish</option>
+      </select>
+
+      <br><br>
+
+
+ -->
+
+
+      <button class="smooth-all" type='submit' value='Login' >LOGIN</button>
+
+      <input type="hidden" name="next" value="{{ next }}">
+  </form>
+
+</body>
+</html>
+
+

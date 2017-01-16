@@ -1,0 +1,20 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$L1TUQncaH69S$WJsNMi+U4GpxrzOzvxg7CP2Db9qIqqA2IS8ywFuWieY=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "alex@iamalexpayne.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2017-01-16T15:54:42.698Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

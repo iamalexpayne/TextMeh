@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Activating virtual enviroment (myvenv) ..."
+source myvenv/bin/activate
+echo "Done"
+
+echo "Running server ..."
+python manage.py runserver 0.0.0.0:8000
+echo "Done"

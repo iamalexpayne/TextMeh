@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo
+echo "***************************************"
+echo "This script only works in Ubuntu 16.04!"
+echo "***************************************"
+echo
+
+read -p "Are you sure you want to continue? (yes/no) "
+if [ "$REPLY" != "yes" ]; then
+   exit
+fi
+echo
+
+echo "Creating virtual enviroment (myvenv) ..."
+python3 -m venv myvenv
+echo "Done"
+
+echo "Activating virtual enviroment (myvenv) ..."
+source myvenv/bin/activate
+echo "Done"
+
+echo "Upgrading pip ..."
+pip install --upgrade pip
+echo "Done"
+
+echo "Installing prerequisites ..."
+pip install -r requirements.txt
+echo "Done"
+
+echo "Importing initial-data ..."
+mkdir -p data
+python manage.py migrate
+python manage.py loaddata initial-data.json
+echo "Done"
+
+echo "Environment Ready!"
