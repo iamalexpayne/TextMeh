@@ -1,0 +1,16 @@
+{% for message in chat %}
+
+	<div>
+		{{ message.receiver }}
+	</div>
+	<div>
+		{{ message.sender }}  
+	</div>
+	<div>
+		{{ message.message }}  
+	</div>
+	<div>
+		{{ message.time }}  
+	</div>
+		
+{% endfor %}

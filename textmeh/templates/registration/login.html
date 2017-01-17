@@ -15,10 +15,10 @@
     {% csrf_token %}
 
       <div class="login-title">Username</div>
-      <input class="login-input smooth-all" id="id_username" name="username" type="text" {% if form.username.value %} value="{{ form.username.value }}" {% endif %} placeholder="Username" onblur="nameFilled()">
+      <input name="username" type="text" {% if form.username.value %} value="{{ form.username.value }}" {% endif %} placeholder="Username" onblur="nameFilled()">
 
       <div class="login-title">Password</div>
-      <input class="login-input smooth-all" id="id_password" name="password" type="password" {% if form.password.value %} value="{{ form.password.value }}" {% endif %} placeholder="Password" onblur="pwFilled()">
+      <input name="password" type="password" {% if form.password.value %} value="{{ form.password.value }}" {% endif %} placeholder="Password" onblur="pwFilled()">
 
       <br><br>
 

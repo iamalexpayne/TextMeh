@@ -17,6 +17,12 @@
 		
 		Select who you want to talk to...
 
+		{% for currentuser in currentusers %}
+
+			<div>
+				{{ currentuser }}  
+			</div>
+		{% endfor %}
 
 	</div>
 </body>

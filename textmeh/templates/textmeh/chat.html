@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>chat</title>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>
+<body>
+Hey, you made it to chat!
+
+<div id="conversation" onload="getMessages()">
+	
+</div>
+
+
+		<br>
+		<br>
+
+	<form method="post" action="">
+	{% csrf_token %}
+		<textarea name="textarea" placeholder="type your message"></textarea>
+		<button name="send" type="submit">Send</button>
+		<button name="clear" type="submit">Clear</button>
+	</form>
+</body>
+
+<script>
+	$(document).ready(function(){
+		getMessages();
+	});
+		function getMessages() {
+			$.get("messages", function(messages) {
+				$("#conversation").html(messages);
+			}); 
+			setTimeout(getMessages, 500);
+		}
+</script>
+
+</html>

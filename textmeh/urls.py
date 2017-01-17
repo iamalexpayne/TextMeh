@@ -11,6 +11,9 @@ urlpatterns = [
 
     url(r'^registration$', views.registration, name='registration'),
 
+    url(r'^chat/(?P<username>\w+)/$', views.chat, name='chat'),
+
+    url(r'^chat/(?P<username>\w+)/messages$', views.messages, name='messages'),
 
 
 ]
