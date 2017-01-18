@@ -8,6 +8,10 @@
 <body>
 Hey, you made it to chat!
 
+<div>
+		<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}">Log Out</a>
+	</div>
+
 <div id="conversation" onload="getMessages()">
 	
 </div>

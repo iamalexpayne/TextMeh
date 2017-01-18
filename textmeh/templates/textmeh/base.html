@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	{% block title %}
+		TextMeh
+	{% endblock %}
+	</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
+	<!-- favicon -->
+	<link rel="icon" href="{% static 'images/textmeh-favicon.png' %}" type="image/gif">
+</head>
+<body>
+
+	{% block content %}
+
+	{% endblock %}
+
+</body>
+</html>

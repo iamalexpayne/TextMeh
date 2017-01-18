@@ -1,29 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Text Meh</title>
-</head>
-<body>
+{% extends 'textmeh/base.html' %}
 
-	<h1>Hello, {{ request.user.username }}</h1>
+{% load static %}
 
-	you speak {{ language }}
+{% block content %}
 
-	<div>
-		<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}">Log Out</a>
+	<div id="choose-convo-instructions" class="instructions">
+		I want to talk with...
 	</div>
 
-	<div>
-		
-		Select who you want to talk to...
-
+	<div id="choose-convo-container">
 		{% for currentuser in currentusers %}
-
-			<div>
-				{{ currentuser }}  
-			</div>
+			<a href="{% url 'home_page' %}/chat/{{ currentuser }}">
+				<div class="convo-option smooth">
+					{{ currentuser }}  
+				</div>
+			</a>
 		{% endfor %}
-
 	</div>
-</body>
-</html>
+
+	<div id="choose-convo-or" class="instructions">
+		or
+	</div>
+
+	<div class="choose-convo-logout-container smooth">
+		<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}">
+			<div id="choose-convo-logout-img">
+				<img src="{% static 'images/logout-icon.png' %}">
+			</div>
+			<div id="choose-convo-logout-text">
+				Log Out	
+			</div>
+		</a>
+	</div>
+	
+
+
+{% endblock %}

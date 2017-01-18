@@ -1,45 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Log In</title>
-</head>
-<body>
+{% extends 'textmeh/base.html' %}
 
-  {% if form.errors %}
-        <div class="login-error">
-          The username or password you entered was incorrect.
-        </div>
-  {% endif %}
+{% load static %}
 
-  <form class="cise-login" method="post" action="">
-    {% csrf_token %}
+{% block title %}
+  TextMeh | Sign In
+{% endblock %}
 
-      <div class="login-title">Username</div>
-      <input name="username" type="text" {% if form.username.value %} value="{{ form.username.value }}" {% endif %} placeholder="Username" onblur="nameFilled()">
+{% block content %}
+	<div class="login-container">
+	<img src="{% static 'images/textmeh-logo.png' %}">
+	<div id="sign-up-instructions" class="instructions">
+		Sign In
+	</div>
 
-      <div class="login-title">Password</div>
-      <input name="password" type="password" {% if form.password.value %} value="{{ form.password.value }}" {% endif %} placeholder="Password" onblur="pwFilled()">
+	{% if form.errors %}
+		<div class="login-error">
+			The username or password you entered was incorrect.
+		</div>
+	{% endif %}
 
-      <br><br>
+		<form method="post" action="">
+		  {% csrf_token %}
 
-      <a href="{% url 'registration' %}">Sign Up</a>
-     <!--  <select class="dropbtn">Language
-      <option>English</option>
-      <option>Spanish</option>
-      </select>
+		  <input id="username" onblur="nameFilled()" maxlength="25" class="login-box smooth" type="text" name="username" placeholder="First Name">
+		  <input id="pw" onblur="pwFilled()" class="login-box smooth" type="password" name="password" placeholder="Password">
 
-      <br><br>
+		  <div type="submit" value="submit" class="login-button-container">
+		    <input class="smooth" type="image" src="{% static 'images/login-button.png' %}" value="submit">
+		  </div>
 
+		</form>
 
- -->
+		<div id="sign-up-option-container">
+			<a href="{% url 'registration' %}">
+				Don't have an account? 
+				<div id="sign-up-option" class="choose-convo-logout-container smooth">
+					Sign up here!
+				</div>
+			</a>
+		</div>
+	</div>
 
+	<script>  
+	  function nameFilled() {
+	    var value = $("#username").val();
+	    if ( value.length > 0 && value != "Default text" ) {
+	      $("#username").addClass("login-input-filled");
+	    }
+	    else {
+	      $("#username").removeClass("login-input-filled");
+	    }
+	  }
+	</script>
 
-      <button class="smooth-all" type='submit' value='Login' >LOGIN</button>
-
-      <input type="hidden" name="next" value="{{ next }}">
-  </form>
-
-</body>
-</html>
+	<script>  
+	  function pwFilled() {
+	    var value = $("#pw").val();
+	    if ( value.length > 0 && value != "Default text" ) {
+	      $("#pw").addClass("login-input-filled");
+	    }
+	    else {
+	      $("#pw").removeClass("login-input-filled");
+	    }
+	  }
+	</script>
+{% endblock %}
 
 

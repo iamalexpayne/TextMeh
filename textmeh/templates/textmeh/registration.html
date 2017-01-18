@@ -1,21 +1,92 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Register</title>
-</head>
-<body>
-	<form method="post" action="">
-	  {% csrf_token %}
-	  {{ form.username }}
-	  {{ form.password }}
+{% extends 'textmeh/base.html' %}
 
-	  <select name="language" class="dropbtn">Language
-	      <option>English</option>
-	      <option>Spanish</option>
-      </select>
+{% load static %}
 
-	  <input type="submit" value="submit" />
-	</form>
-</body>
-</html>
+
+{% block title %}
+	TextMeh | Registration
+{% endblock %}
+
+
+{% block content %}
+	<div class="login-container">
+		<img src="{% static 'images/textmeh-logo.png' %}">
+		<div id="sign-up-instructions" class="instructions">
+			Sign Up
+		</div>
+
+		{% if form.errors %}
+	        <div class="login-error">
+	          Please fill out the form completely
+	        </div>
+	    {% endif %}
+
+		<form method="post" action="">
+			{% csrf_token %}
+
+			<input id="username" onblur="nameFilled()" maxlength="25" class="login-box smooth" type="text" name="username" placeholder="First Name">
+			<input id="pw" onblur="pwFilled()" class="login-box smooth" type="password" name="password" placeholder="Password">
+
+			<div id="language-select">
+				<select id="lang" onblur="languageFilled()" name="language">
+					<option>select one</option>
+					<option>English</option>
+					<option>Spanish</option>
+				</select>
+			</div>
+
+			<div type="submit" value="submit" class="login-button-container">
+				<input class="smooth" type="image" src="{% static 'images/login-button.png' %}" value="submit">
+			</div>
+
+		</form>
+	</div>
+
+	<script>  
+	    function nameFilled() {
+	      var value = $("#username").val();
+	      if ( value.length > 0 && value != "Default text" ) {
+	        $("#username").addClass("login-input-filled");
+	      }
+	      else {
+	        $("#username").removeClass("login-input-filled");
+	      }
+	    }
+    </script>
+
+    <script>  
+	    function pwFilled() {
+	      var value = $("#pw").val();
+	      if ( value.length > 0 && value != "Default text" ) {
+	        $("#pw").addClass("login-input-filled");
+	      }
+	      else {
+	        $("#pw").removeClass("login-input-filled");
+	      }
+	    }
+    </script>
+
+    <!-- 
+
+		need languageFilled() working
+
+		links to chats not working
+
+		catch already used username errors
+
+     -->
+    <script>  
+	    function languageFilled() {
+	      var value = $("#lang").val();
+	      console.log(value);
+	      if ( value != "select one" ) {
+	        $("#lang").addClass("login-input-filled");
+	      }
+	      else {
+	        $("#lang").removeClass("login-input-filled");
+	      }
+	    }
+    </script>
+{% endblock %}
+
 
