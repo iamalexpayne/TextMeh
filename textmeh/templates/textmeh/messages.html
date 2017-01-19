@@ -1,16 +1,23 @@
-{% for message in chat %}
+{% extends 'textmeh/base.html' %}
 
-	<div>
-		{{ message.receiver }}
-	</div>
-	<div>
-		{{ message.sender }}  
-	</div>
-	<div>
-		{{ message.message }}  
-	</div>
-	<div>
-		{{ message.time }}  
-	</div>
-		
-{% endfor %}
+{% load static %}
+
+{% block content %}
+		{% for message in chat %}
+			<div class="message-container">
+				<div class="message-send-time smooth">
+					{{ message.time }}  
+				</div>
+				{% if message.sender.username == request.user.username %} 
+					<div class="message message-from-sender">
+						{{ message.message }}  
+					</div>
+				{% else %}
+					<div class="message message-from-receiver">
+						{{ message.message }}  
+					</div>
+				{% endif %}
+			</div>
+		{% endfor %}
+
+{% endblock %}

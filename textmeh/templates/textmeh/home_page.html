@@ -10,9 +10,9 @@
 
 	<div id="choose-convo-container">
 		{% for currentuser in currentusers %}
-			<a href="{% url 'home_page' %}/chat/{{ currentuser }}">
+			<a href="{% url 'home_page' %}chat/{{ currentuser.0 }}">
 				<div class="convo-option smooth">
-					{{ currentuser }}  
+					{{ currentuser.0 }} who speaks {{ currentuser.1 }} 
 				</div>
 			</a>
 		{% endfor %}

@@ -1,43 +1,117 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>chat</title>
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-</head>
-<body>
-Hey, you made it to chat!
+{% extends 'textmeh/base.html' %}
 
-<div>
-		<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}">Log Out</a>
+{% load static %}
+
+{% block content %}
+	
+	<span id="menu-button" class="smooth" onclick="showMenu()">
+		
+		<img src="{% static 'images/menu-icon.png' %}">
+	</span>
+
+	<div id="menu" class="smooth">
+		<span id="menu-close-button" class="smooth" onclick="closeMenu()">
+			<img src="{% static 'images/menu-close-icon.png' %}">
+		</span>
+
+		<div id="menu-options-container">
+			
+		
+
+		<div id="menu-convo-container" class="smooth">
+			<a href="{% url 'home_page' %}">
+				<div id="menu-convo-img">
+					<img src="{% static 'images/TextMeh-logo-white.png' %}">
+				</div>
+				<div id="menu-convo-text">
+					Change <br> Conversation	
+				</div>
+			</a>
+		</div>
+
+		<hr>
+
+		<div id="menu-language-container" class="smooth">
+			<label>
+				<input type="checkbox" name="duo-language">
+					<span>
+						<div id="menu-lang-img">
+							<img src="{% static 'images/language-icon-white.png' %}">
+						</div>
+						<div id="menu-convo-text">
+							Show Both <br> Languages
+						</div>
+					</span>
+			</label>
+		</div>
+
+		<hr>
+		
+		<div id="menu-logout-container" class="smooth">
+			<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}">
+				<div id="menu-logout-img">
+					<img src="{% static 'images/white-logout-icon.png' %}">
+				</div>
+				<div id="menu-logout-text">
+					Log Out	
+				</div>
+			</a>
+		</div>
+
+		</div>
+
 	</div>
 
-<div id="conversation" onload="getMessages()">
-	
-</div>
+	<div id="chat-area" class="smooth">
+		<div id="convo-container">
+			<div id="conversation" onload="getMessages()">
+				
+			</div>
+		</div>
 
 
-		<br>
-		<br>
+	<div id="send-area">
+		<form method="post" action="">
+		{% csrf_token %}
+			<textarea id="typing-area" class="smooth" name="textarea" placeholder="Type your message..."></textarea>
+			<button id="send-button" class="smooth" name="send" type="submit">Send</button>
+		</form>
+	</div>
 
-	<form method="post" action="">
-	{% csrf_token %}
-		<textarea name="textarea" placeholder="type your message"></textarea>
-		<button name="send" type="submit">Send</button>
-		<button name="clear" type="submit">Clear</button>
-	</form>
-</body>
+	</div>
 
 <script>
 	$(document).ready(function(){
 		getMessages();
 	});
-		function getMessages() {
-			$.get("messages", function(messages) {
-				$("#conversation").html(messages);
-			}); 
-			setTimeout(getMessages, 500);
-		}
+
+	function getMessages() {
+		$.get("messages", function(messages) {
+			$("#conversation").html(messages);
+		}); 
+		setTimeout(getMessages, 500);
+	}
 </script>
 
-</html>
+<script>
+	function showMenu() {
+		document.getElementById("menu").style.width = "400px";
+		document.getElementById("chat-area").style.marginLeft = "400px";
+		document.getElementById("typing-area").style.marginLeft = "400px";
+		document.getElementById("send-button").style.marginRight = "-50px";
+	}
+
+	function closeMenu() {
+		document.getElementById("menu").style.width = "0px";
+		document.getElementById("chat-area").style.marginLeft = "0px";
+		document.getElementById("typing-area").style.marginLeft = "225px";
+		document.getElementById("send-button").style.marginRight = "50px";
+	}
+
+	
+</script>
+
+{% endblock %}
+
+
+

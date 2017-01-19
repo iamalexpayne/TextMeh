@@ -1,3 +1,275 @@
+#menu-option-container {
+	position: fixed;
+}
+
+#menu-lang-img {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#menu-lang-img img {
+	width: 75px;
+}
+
+#menu-language-container {
+	margin: 50px auto;
+	text-align: center;
+	width: 330px;
+	border: 3px solid #4885ed;
+	cursor: pointer;
+	padding-top: 5px;
+}
+
+#menu-language-container:hover {
+	border: 3px solid white;
+	border-radius: 50px;
+}
+
+#menu-language-container label {
+	font-weight: normal;
+}
+
+#menu-language-container label div {
+	display: inline-block;
+	vertical-align: middle;
+	color: white;
+	font-size: 30px;
+	padding-left: 20px;
+}
+
+#menu-language-container label input {
+	position: absolute;
+	top: -20px;
+}
+
+#menu-language-container input:checked + span {
+	background-color: white;
+	content: "Hide";
+}
+
+#menu-convo-container {
+	margin: 50px auto;
+	text-align: center;
+	width: 330px;
+	border: 3px solid #4885ed;
+	margin-top: 120px;
+}
+
+#menu-convo-container:hover {
+	border: 3px solid white;
+	border-radius: 50px;
+}
+
+#menu-logout-container {
+	margin: 50px auto;
+	text-align: center;
+	width: 330px;
+	border: 3px solid #4885ed;
+}
+
+#menu-logout-container:hover {
+	border: 3px solid white;
+	border-radius: 50px;
+}
+
+hr {
+	color: white;
+	border-color: white;
+	background-color: white;
+	height: 3px;
+	width: 300px;
+}
+
+#menu-logout-img {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#menu-logout-img img {
+	width: 75px;
+}
+
+#menu-convo-img img {
+	width: 75px;
+	float: left;
+	/*background-color: blue;*/
+	margin-top: 3px;
+	margin-left: 25px;
+}
+
+#menu-logout-text {
+	display: inline-block;
+	vertical-align: middle;
+	color: white;
+	font-size: 30px;
+	padding-left: 20px;
+}
+
+#menu-convo-text {
+	display: inline-block;
+	vertical-align: middle;
+	color: white;
+	font-size: 30px;
+	padding-left: -30px;
+	text-align: left;
+	/*background-color: red;*/
+}
+
+#menu {
+	background-color: #4885ed;
+	/*width: 350px;*/
+	width: 0;
+	height: 100%; 
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
+}
+
+#menu-close-button {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	transform: scale(.85);
+}
+
+#menu-close-button:hover {
+	transform: scale(1);
+}
+
+#menu-button {
+	position: absolute;
+	margin-left: 15px;
+	margin-top: 10px;
+	cursor: pointer;
+	transform: scale(.85);
+}
+
+#menu-button:hover {
+	transform: scale(1);
+}
+
+#send-area {
+	background-color: #979797;
+	padding: 10px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+textarea {
+	border-radius: 15px;
+	resize: vertical;
+	height: 50px;
+	max-height: 130px;
+	border: none;
+	width: 680px;
+	display: inline-block;
+	vertical-align: bottom; 
+	bottom: 0;
+	font-size: 22px;
+	letter-spacing: .7px;
+	padding: 10px;
+	padding-left: 15px;
+	outline: none;
+	margin-left: 225px;
+}
+
+#send-button {
+	background-color: #4885ed;
+	color: white; 
+	border: 3px solid #4885ed;
+	display: inline-block;
+	vertical-align: bottom;
+	font-size: 30px;
+	margin-left: 25px;
+	margin-right: 50px;
+	padding: 0px;
+	padding-left: 25px;
+	padding-right: 25px;
+	letter-spacing: .5px;
+	width: 150px;
+}
+
+#send-button:hover, #send-button:focus {
+	/*background-color: #3cba54;*/
+	/*border: 3px solid #3cba54;*/
+	/*background-color: white;*/
+	border: 3px solid white;
+	/*letter-spacing: 1.4px;*/
+	outline: none;
+	font-style: italic;
+
+}
+
+.message-send-time {
+	text-align: center;
+	color: #979797;
+	/*padding-top: 15px;*/
+	/*padding-bottom: -3px;*/
+	visibility: hidden;
+	/*position: relative;*/
+}
+
+.convo-container {
+	position: relative;
+}
+
+#conversation {
+	margin: 0 auto;
+	width: 700px;
+	background-color: lightgray;
+	padding: 15px;
+	max-height: 607px;
+	overflow-y: scroll;
+	position: relative;
+	bottom: 0;
+}
+
+.message-container {
+	/*padding: 5px;
+	background-color: red;
+	margin: 15px;
+	position: relative;
+	padding-bottom: 15px;*/
+}
+
+.message {
+	font-size: 20px;
+	max-width: 65%;
+	padding-left: 15px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 30px;
+	font-weight: 200;
+	letter-spacing: .7px;
+	/*position: absolute;*/
+	/*margin: 5px;*/
+}
+
+.message-container:hover > .message-send-time {
+	visibility: visible;
+}
+
+.message-from-receiver {
+	background-color: #979797;
+	color: black;
+	border: 3px solid #979797;
+	left: 0;
+}
+
+.message-from-sender {
+	background-color: #4885ed;
+	color: white;
+	border: 3px solid #4885ed;
+	right: 0;
+}
+
 .instructions {
 	text-align: center;
 	color: #4885ed;
@@ -20,6 +292,7 @@
 	margin: 0 auto;
 	width: 100px;
 	font-size: 30px;
+	padding-bottom: 10px;
 }
 
 .choose-convo-logout-container {
@@ -27,7 +300,7 @@
 	text-align: center;
 	padding-top: -5px;
 	/*background-color: blue;*/
-	width: 215px;
+	width: 245px;
 	border: 3px solid white;
 }
 

@@ -13,8 +13,9 @@ def home_page(request):
 	queryset = get_current_users()
 	currentusers = []
 	for user in queryset:
-		if user!=request.user:
-			currentusers.append(user.username + " who speaks " + UserLanguage.objects.get(user=user).language)
+		if user != request.user:
+			currentusers.append((user.username, UserLanguage.objects.get(user=user).language))
+	
 	return render(request, 'textmeh/home_page.html', { 'language': userlanguage.language, 'currentusers': currentusers })
 
 def get_current_users():
