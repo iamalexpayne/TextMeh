@@ -1,3 +1,11 @@
+#offline-message {
+	color: #979797;
+	text-align: center;
+	font-size: 45px;
+	margin: 50px;
+	margin-top: 150px;
+}
+
 #menu-option-container {
 	position: fixed;
 }
@@ -42,11 +50,6 @@
 	top: -20px;
 }
 
-#menu-language-container input:checked + span {
-	background-color: white;
-	content: "Hide";
-}
-
 #menu-convo-container {
 	margin: 50px auto;
 	text-align: center;
@@ -78,6 +81,10 @@ hr {
 	background-color: white;
 	height: 3px;
 	width: 300px;
+}
+
+p {
+	margin-bottom: -5px;
 }
 
 #menu-logout-img {
@@ -196,11 +203,7 @@ textarea {
 }
 
 #send-button:hover, #send-button:focus {
-	/*background-color: #3cba54;*/
-	/*border: 3px solid #3cba54;*/
-	/*background-color: white;*/
 	border: 3px solid white;
-	/*letter-spacing: 1.4px;*/
 	outline: none;
 	font-style: italic;
 
@@ -221,53 +224,88 @@ textarea {
 
 #conversation {
 	margin: 0 auto;
-	width: 700px;
-	background-color: lightgray;
+	width: 800px;
 	padding: 15px;
-	max-height: 607px;
-	overflow-y: scroll;
+	max-height: 635px;
+	overflow-y: hidden;
 	position: relative;
 	bottom: 0;
+	/*background-color: blue;*/
+	display: table;
 }
 
 .message-container {
-	/*padding: 5px;
-	background-color: red;
-	margin: 15px;
-	position: relative;
-	padding-bottom: 15px;*/
+	/*background-color: red;*/
+	/*position: relative;*/
+	width: 100%;
+	display: table-row;
 }
 
-.message {
+.message-from-receiver, .message-from-sender {
 	font-size: 20px;
-	max-width: 65%;
-	padding-left: 15px;
-	padding-right: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border-radius: 30px;
-	font-weight: 200;
+	font-weight: 300;
 	letter-spacing: .7px;
-	/*position: absolute;*/
-	/*margin: 5px;*/
-}
-
-.message-container:hover > .message-send-time {
-	visibility: visible;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding: 5px 10px 5px 15px;
+	max-width: 45%;
+	display: inline-block;
+	/*clear: both;*/
 }
 
 .message-from-receiver {
-	background-color: #979797;
+	background-color: lightgray;
+	border: 3px solid lightgray;
 	color: black;
-	border: 3px solid #979797;
-	left: 0;
+	float: left;
+	margin-right: auto;
+	border-radius: 30px 30px 30px 0;
 }
 
 .message-from-sender {
 	background-color: #4885ed;
 	color: white;
 	border: 3px solid #4885ed;
-	right: 0;
+	float: right;
+	margin-left: auto;
+	border-radius: 30px 30px 0 30px;
+
+}
+
+.message-from-other-language-receiver, .message-from-other-language-sender {
+	font-size: 20px;
+	font-weight: 300;
+	letter-spacing: .7px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding: 5px 10px 5px 15px;
+	max-width: 48%;
+	display: inline-block;
+}
+
+.message-from-other-language-receiver {
+	margin-left: -30px;
+	z-index: 0;
+	background-color: none;
+	border: 3px solid lightgray;
+	border-left: none;
+	color: black;
+	float: left;
+	padding-left: 40px;
+	margin-right: auto;
+	border-radius: 0 30px 30px 0;
+}
+
+.message-from-other-language-sender {
+	background-color: none;
+	padding-right: 40px;
+	color: #4885ed;
+	border: 3px solid #4885ed;
+	border-right: none;
+	float: right;
+	margin-right: -30px;
+	margin-left: auto;
+	border-radius: 30px 0 0 30px;
 }
 
 .instructions {
@@ -299,16 +337,31 @@ textarea {
 	margin: 0 auto;
 	text-align: center;
 	padding-top: -5px;
-	/*background-color: blue;*/
+	margin-bottom: 15px;
 	width: 245px;
 	border: 3px solid white;
 }
 
 .choose-convo-logout-container:hover, .choose-convo-logout-container:focus {
-	/*border: 3px solid  #db3236;*/
+	/*padding: 15px 10px;*/
 	border: 3px solid  #4885ed;
 	border-radius: 50px;
 }
+
+.signup-container {
+	margin: 10px auto;
+	text-align: center;
+	/*padding-top: -5px;*/
+	/*margin-bottom: 15px;*/
+	width: 245px;
+	border: 3px solid white;
+}
+
+.signup-container:hover, .signup-container:focus {
+	border: 3px solid  #4885ed;
+	border-radius: 50px;
+}
+
 
 
 #choose-convo-logout-img {
@@ -334,12 +387,13 @@ textarea {
 
 #sign-up-option-container {
 	font-size: 20px;
-	padding-top: 15px;
+	padding-top: 20px;
 }
 
 #sign-up-option {
 	color: #4885ed;
 	font-size: 25px;
+	padding: 5px 5px;
 }
 
 #language-select select {
@@ -386,7 +440,20 @@ textarea {
 	padding-bottom: 5px;
 	margin-bottom: 15px;
 	background-color: white;
+}
+
+#survey-link {
+	display: inline-block;
+	vertical-align: middle;
+	color: #4885ed;
+	font-size: 30px;
+	/*padding-left: 10px;*/
+	padding: 15px 10px;
+}
+
+.capitalize {
 	text-transform: capitalize;
+	display: inline;
 }
 
 .convo-option:hover {

@@ -3,21 +3,48 @@
 {% load static %}
 
 {% block content %}
+
+	{% if chat %}
+
 		{% for message in chat %}
-			<div class="message-container">
-				<div class="message-send-time smooth">
-					{{ message.time }}  
+			{% if message.sender.username == request.user.username %} 
+				
+				<div class="message-container">
+					<div class="message-from-sender">
+						{{ message.message }}  
+					</div>
+					<div id="translate-send" class="message-from-other-language-sender smooth">
+						{{ message.message }}  
+					</div>
 				</div>
-				{% if message.sender.username == request.user.username %} 
-					<div class="message message-from-sender">
+
+			{% else %}
+
+				<div class="message-container">
+					<div class="message-from-receiver">
 						{{ message.message }}  
 					</div>
-				{% else %}
-					<div class="message message-from-receiver">
+					<div id="translate-receive" class="message-from-other-language-receiver smooth">
 						{{ message.message }}  
 					</div>
-				{% endif %}
-			</div>
+				</div>
+
+			{% endif %}
 		{% endfor %}
 
+	{% else %} 
+
+		<div id="offline-message">
+			Awh! &ensp; : ) <br>It's your first message to <p class="capitalize">{{ request.user.username }}</p>! 
+		</div>
+
+	{% endif %}
+
+
 {% endblock %}
+
+
+
+
+
+

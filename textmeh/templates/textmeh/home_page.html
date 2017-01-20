@@ -4,23 +4,31 @@
 
 {% block content %}
 
-	<div id="choose-convo-instructions" class="instructions">
-		I want to talk with...
-	</div>
+	{% if currentusers %}
+		<div id="choose-convo-instructions" class="instructions">
+			I want to talk with...
+		</div>
 
-	<div id="choose-convo-container">
-		{% for currentuser in currentusers %}
-			<a href="{% url 'home_page' %}chat/{{ currentuser.0 }}">
-				<div class="convo-option smooth">
-					{{ currentuser.0 }} who speaks {{ currentuser.1 }} 
-				</div>
-			</a>
-		{% endfor %}
-	</div>
+		<div id="choose-convo-container">
+			{% for currentuser in currentusers %}
+				<a href="{% url 'home_page' %}chat/{{ currentuser.0 }}">
+					<div class="convo-option smooth">
+						<p class="capitalize">{{ currentuser.0 }}</p> who speaks {{ currentuser.1 }} 
+					</div>
+				</a>
+			{% endfor %}
+		</div>
 
-	<div id="choose-convo-or" class="instructions">
-		or
-	</div>
+		<div id="choose-convo-or" class="instructions">
+			or
+		</div>
+
+	{% else %}
+		<div id="offline-message">
+			Darn! &ensp; No one is online right now. &ensp; :(
+		</div>
+	{% endif %}
+
 
 	<div class="choose-convo-logout-container smooth">
 		<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}">
@@ -29,6 +37,18 @@
 			</div>
 			<div id="choose-convo-logout-text">
 				Log Out	
+			</div>
+		</a>
+	</div>
+
+	<div id="choose-convo-or" class="instructions">
+		or
+	</div>
+
+	<div class="choose-convo-logout-container smooth">
+		<a target="_blank" href="https://ufl.qualtrics.com/SE/?SID=SV_0Js36hdGYpC4wbX">
+			<div id="survey-link">
+				Take the Survey
 			</div>
 		</a>
 	</div>

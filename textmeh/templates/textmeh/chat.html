@@ -33,13 +33,13 @@
 
 		<div id="menu-language-container" class="smooth">
 			<label>
-				<input type="checkbox" name="duo-language">
+				<input type="checkbox" checked="false" name="duo-language" class="translateCheck">
 					<span>
 						<div id="menu-lang-img">
 							<img src="{% static 'images/language-icon-white.png' %}">
 						</div>
 						<div id="menu-convo-text">
-							Show Both <br> Languages
+							<p id="toggle-words">Hide Both</p> Languages
 						</div>
 					</span>
 			</label>
@@ -63,32 +63,40 @@
 	</div>
 
 	<div id="chat-area" class="smooth">
+
 		<div id="convo-container">
-			<div id="conversation" onload="getMessages()">
-				
-			</div>
+			<div id="conversation" onload="getMessages()"></div>
 		</div>
 
-
-	<div id="send-area">
-		<form method="post" action="">
-		{% csrf_token %}
-			<textarea id="typing-area" class="smooth" name="textarea" placeholder="Type your message..."></textarea>
-			<button id="send-button" class="smooth" name="send" type="submit">Send</button>
-		</form>
-	</div>
-
+		<div id="send-area">
+			<form method="post" action="">
+			{% csrf_token %}
+				<textarea id="typing-area" class="smooth autoExpand" name="textarea" placeholder="Type your message..." rows="1" data-min-rows="1"></textarea>
+				<button id="send-button" class="smooth" name="send" type="submit">Send</button>
+			</form>
+		</div>
+		
 	</div>
 
 <script>
 	$(document).ready(function(){
 		getMessages();
+		goToBottom();
 	});
 
 	function getMessages() {
 		$.get("messages", function(messages) {
 			$("#conversation").html(messages);
+			goToBottom();
 		}); 
+		if( $('.translateCheck').is(':checked')) {
+			$(".message-from-other-language-receiver").show();
+			$(".message-from-other-language-sender").show();
+		} 
+		if( $('.translateCheck').is(':unchecked')) {
+			$(".message-from-other-language-receiver").hide();
+			$(".message-from-other-language-sender").hide();
+		}
 		setTimeout(getMessages, 500);
 	}
 </script>
@@ -108,8 +116,36 @@
 		document.getElementById("send-button").style.marginRight = "50px";
 	}
 
-	
+	function showLanguage() {
+		document.getElementById("toggle-words").innerHTML = "Show Both";
+	}		
+
+	function hideLanguage() {
+		document.getElementById("toggle-words").innerHTML = "Hide Both";
+	}
+
+	function goToBottom() {
+    	var x = document.getElementById("conversation");
+    	var h = x.scrollHeight;
+        $("div").scrollTop(h);
+	}
 </script>
+
+<script>
+	$('.translateCheck').click(function() {
+		if( $(this).is(':checked')) {
+			$(".message-from-other-language-receiver").show();
+			$(".message-from-other-language-sender").show();
+			hideLanguage();
+		} else {
+			$(".message-from-other-language-receiver").hide();
+			$(".message-from-other-language-sender").hide();
+			showLanguage();
+		}
+		closeMenu();
+	}); 
+</script>
+
 
 {% endblock %}
 
