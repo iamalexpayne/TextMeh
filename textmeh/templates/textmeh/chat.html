@@ -33,13 +33,13 @@
 
 		<div id="menu-language-container" class="smooth">
 			<label>
-				<input type="checkbox" checked="false" name="duo-language" class="translateCheck">
+				<input id="checkbox" type="checkbox" name="duo-language" class="translateCheck">
 					<span>
 						<div id="menu-lang-img">
 							<img src="{% static 'images/language-icon-white.png' %}">
 						</div>
 						<div id="menu-convo-text">
-							<p id="toggle-words">Hide Both</p> Languages
+							<p id="toggle-words">Hide Other</p> <p id="toggle-s">Language</p>
 						</div>
 					</span>
 			</label>
@@ -65,7 +65,7 @@
 	<div id="chat-area" class="smooth">
 
 		<div id="convo-container">
-			<div id="conversation" onload="getMessages()"></div>
+			<div id="conversation"></div>
 		</div>
 
 		<div id="send-area">
@@ -75,28 +75,30 @@
 				<button id="send-button" class="smooth" name="send" type="submit">Send</button>
 			</form>
 		</div>
-		
+
 	</div>
 
 <script>
+	var firsttime = true;
+
 	$(document).ready(function(){
 		getMessages();
-		goToBottom();
 	});
 
 	function getMessages() {
 		$.get("messages", function(messages) {
 			$("#conversation").html(messages);
-			goToBottom();
+			if (firsttime) {
+				goToBottom();
+				firsttime = false;
+				document.getElementById('checkbox').checked = localStorage.getItem('checkboxValues') == "true";
+			}
+			if ($('.translateCheck').is(':checked')) {
+				$(".message-from-other-language-receiver").hide();
+				$(".message-from-other-language-sender").hide();
+				showLanguage();
+			}
 		}); 
-		if( $('.translateCheck').is(':checked')) {
-			$(".message-from-other-language-receiver").show();
-			$(".message-from-other-language-sender").show();
-		} 
-		if( $('.translateCheck').is(':unchecked')) {
-			$(".message-from-other-language-receiver").hide();
-			$(".message-from-other-language-sender").hide();
-		}
 		setTimeout(getMessages, 500);
 	}
 </script>
@@ -118,29 +120,33 @@
 
 	function showLanguage() {
 		document.getElementById("toggle-words").innerHTML = "Show Both";
+		document.getElementById("toggle-s").innerHTML = "Languages";
 	}		
 
 	function hideLanguage() {
-		document.getElementById("toggle-words").innerHTML = "Hide Both";
+		document.getElementById("toggle-words").innerHTML = "Hide Other";
+		document.getElementById("toggle-s").innerHTML = "Language";
 	}
 
 	function goToBottom() {
-    	var x = document.getElementById("conversation");
+    	var x = document.getElementById("convo-container");
     	var h = x.scrollHeight;
-        $("div").scrollTop(h);
+        $("#convo-container").scrollTop(h);
 	}
 </script>
 
 <script>
 	$('.translateCheck').click(function() {
 		if( $(this).is(':checked')) {
-			$(".message-from-other-language-receiver").show();
-			$(".message-from-other-language-sender").show();
-			hideLanguage();
-		} else {
 			$(".message-from-other-language-receiver").hide();
 			$(".message-from-other-language-sender").hide();
+			localStorage.setItem("checkboxValues", true);
 			showLanguage();
+		} else {
+			$(".message-from-other-language-receiver").show();
+			$(".message-from-other-language-sender").show();
+			localStorage.setItem("checkboxValues", false);
+			hideLanguage();
 		}
 		closeMenu();
 	}); 

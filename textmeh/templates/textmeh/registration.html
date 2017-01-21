@@ -30,8 +30,9 @@
 			<div id="language-select">
 				<select id="lang" onblur="languageFilled()" name="language">
 					<option>select one</option>
-					<option>English</option>
-					<option>Spanish</option>
+					{% for lang in language_list %}
+						<option>{{ lang }}</option>
+					{% endfor %}
 				</select>
 			</div>
 

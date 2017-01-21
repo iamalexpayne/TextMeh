@@ -14,7 +14,7 @@
 						{{ message.message }}  
 					</div>
 					<div id="translate-send" class="message-from-other-language-sender smooth">
-						{{ message.message }}  
+						{{ message.translation }}  
 					</div>
 				</div>
 
@@ -22,7 +22,7 @@
 
 				<div class="message-container">
 					<div class="message-from-receiver">
-						{{ message.message }}  
+						{{ message.translation }}  
 					</div>
 					<div id="translate-receive" class="message-from-other-language-receiver smooth">
 						{{ message.message }}  
@@ -35,7 +35,7 @@
 	{% else %} 
 
 		<div id="offline-message">
-			Awh! &ensp; : ) <br>It's your first message to <p class="capitalize">{{ request.user.username }}</p>! 
+			Awh! &ensp; : ) <br>It's your first message to <p class="capitalize">{{ username }}</p>! 
 		</div>
 
 	{% endif %}

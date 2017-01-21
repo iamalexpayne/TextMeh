@@ -218,8 +218,13 @@ textarea {
 	/*position: relative;*/
 }
 
-.convo-container {
+#convo-container {
 	position: relative;
+	/*background-color: blue;*/
+	max-height: 635px;
+	overflow-y: scroll;
+	width: 800px;
+	margin: 0 auto;
 }
 
 #conversation {
@@ -236,7 +241,7 @@ textarea {
 
 .message-container {
 	/*background-color: red;*/
-	/*position: relative;*/
+	position: relative;
 	width: 100%;
 	display: table-row;
 }

@@ -5,18 +5,19 @@ from django.contrib.auth.models import User
 from .models import UserLanguage, Chat
 from django.contrib.sessions.models import Session
 from django.utils import timezone
+# from microsofttranslator import Translator
+from .utils import Translator
 
 
 @login_required
 def home_page(request):
-	userlanguage = UserLanguage.objects.get(user=request.user)
 	queryset = get_current_users()
 	currentusers = []
 	for user in queryset:
 		if user != request.user:
 			currentusers.append((user.username, UserLanguage.objects.get(user=user).language))
 	
-	return render(request, 'textmeh/home_page.html', { 'language': userlanguage.language, 'currentusers': currentusers })
+	return render(request, 'textmeh/home_page.html', { 'currentusers': currentusers })
 
 def get_current_users():
     active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
@@ -36,25 +37,28 @@ def registration(request):
 			language = userform.cleaned_data['language']
 			user = User.objects.create_user(username=username, password=password)
 			user.save()
-			userlanguage = UserLanguage.objects.create(user=user, language=language)
+			userlanguage = UserLanguage.objects.create(user=user, language=language, language_code=UserLanguage.getLanguageCode(language))	
 			userlanguage.save()
 			return redirect('home_page')
 	else:
 		userform = UserForm()
-	return  render(request, 'textmeh/registration.html', { 'form': userform })
+	return  render(request, 'textmeh/registration.html', { 'form': userform, 'language_list': sorted(UserLanguage.getLanguageList()) })
 
 @login_required
 def chat(request, username):
 	if request.method == 'POST':
-		action = request.POST.get('clear', None)
-		if action:
-			chat = Chat.objects.filter(sender=request.user, receiver=User.objects.get(username=username)) | Chat.objects.filter(sender=User.objects.get(username=username), receiver=request.user)
-			chat.delete()
-			return redirect('chat', username=username)
-
 		message = request.POST.get('textarea', None)
 		if message:
-			chat = Chat(sender=request.user, receiver=User.objects.get(username=username), message=message, time=timezone.now())
+			ok = True
+			while (ok):
+				try:
+					translator = Translator('6a5a6526adeb44189e6d267152985df1')
+					# translator = Translator('TextMeh', 'DX4su+1nsJeXzH0t+HbyHQDbzOpXeX4nXL4ScOiPQKc=')
+					translation = translator.translate(message, UserLanguage.objects.get(user=User.objects.get(username=username)).language_code)
+					ok = False
+				except:
+					pass
+			chat = Chat(sender=request.user, receiver=User.objects.get(username=username), message=message, translation=translation, time=timezone.now())
 			chat.save()
 			return redirect('chat', username=username)
 	chat = Chat.objects.filter(sender=request.user, receiver=User.objects.get(username=username)) | Chat.objects.filter(sender=User.objects.get(username=username), receiver=request.user)
@@ -65,7 +69,7 @@ def chat(request, username):
 def messages(request, username):
 	chat = Chat.objects.filter(sender=request.user, receiver=User.objects.get(username=username)) | Chat.objects.filter(sender=User.objects.get(username=username), receiver=request.user)
 	chat = chat.order_by('time')
-	return  render(request, 'textmeh/messages.html', { 'chat': chat })	
+	return  render(request, 'textmeh/messages.html', { 'chat': chat , 'username': username})	
 
 
 

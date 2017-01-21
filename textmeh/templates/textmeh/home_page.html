@@ -45,11 +45,12 @@
 		or
 	</div>
 
-	<div class="choose-convo-logout-container smooth">
-		<a target="_blank" href="https://ufl.qualtrics.com/SE/?SID=SV_0Js36hdGYpC4wbX">
+	<div class="choose-convo-logout-container smooth" onclick="window.open('https://ufl.qualtrics.com/SE/?SID=SV_0Js36hdGYpC4wbX');">
+		<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}">
 			<div id="survey-link">
 				Take the Survey
 			</div>
+			<a href="{% url 'manage_logout' %}?next={% url 'home_page' %}"></a>
 		</a>
 	</div>
 	
