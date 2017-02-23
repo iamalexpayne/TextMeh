@@ -52,7 +52,7 @@ def chat(request, username):
 			ok = True
 			while (ok):
 				try:
-					translator = Translator('6a5a6526adeb44189e6d267152985df1')
+					translator = Translator('74857aa273724df793371c715124228d')
 					# translator = Translator('TextMeh', 'DX4su+1nsJeXzH0t+HbyHQDbzOpXeX4nXL4ScOiPQKc=')
 					translation = translator.translate(message, UserLanguage.objects.get(user=User.objects.get(username=username)).language_code)
 					ok = False
